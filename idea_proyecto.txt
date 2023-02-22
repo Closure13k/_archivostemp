@@ -1,0 +1,74 @@
+-- *********************************************************************
+-- *********************************************************************
+-- 							REVIEW CONTENTS
+-- *********************************************************************
+-- *********************************************************************
+-- ----------------------------------------
+-- BD ProyectoDI
+-- ----------------------------------------
+DROP DATABASE IF EXISTS ProyectoDI;
+CREATE DATABASE IF NOT EXISTS ProyectoDI;
+-- ########################################
+-- Tablas generadas
+-- ########################################
+-- ----------------------------------------
+-- Tabla Cliente
+-- ----------------------------------------
+DROP TABLE IF EXISTS Cliente;
+CREATE TABLE IF NOT EXISTS Cliente
+(
+	nif CHAR(9) PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellidos VARCHAR(150) NOT NULL,
+	fecha_nacimiento DATE NOT NULL,
+	foto_perfil VARCHAR(500) UNIQUE NOT NULL -- Ruta a carpeta de imágenes + archivo.png
+);
+-- ----------------------------------------
+-- Tabla Seguro
+-- ----------------------------------------
+DROP TABLE IF EXISTS Seguro;
+CREATE TABLE IF NOT EXISTS Seguro
+(
+	codigo_tipo CHAR(6) PRIMARY KEY,
+	tipo VARCHAR(255) UNIQUE NOT NULL,
+	/*
+	 * Planear fórmula para esto:
+	 * A mayor edad -> más barato.
+	 * A vehículo más nuevo -> más barato.
+	 */
+	multiplicador_edad_cliente DECIMAL(3,2) NOT NULL,
+	multiplicador_edad_vehiculo DECIMAL(3,2) NOT NULL,
+	precio_base DECIMAL(5,2) NOT NULL
+);
+-- ----------------------------------------
+-- Tabla Vehiculo
+-- ----------------------------------------
+DROP TABLE IF EXISTS Vehiculo;
+CREATE TABLE IF NOT EXISTS Vehiculo
+(
+	matricula CHAR(7) PRIMARY KEY,
+	modelo VARCHAR(50) NOT NULL,
+	marca VARCHAR(50) NOT NULL,
+	fecha DATE NOT NULL,
+	cliente_nif CHAR(9) NOT NULL,
+	seguro_codigo CHAR(6) NOT NULL,
+	FOREIGN KEY(cliente_nif)
+		REFERENCES Cliente(nif)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY(seguro_codigo)
+		REFERENCES Seguro(codigo_tipo)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE
+);
+-- ----------------------------------------
+-- Tabla Accidente
+-- ----------------------------------------
+DROP TABLE IF EXISTS Accidente;
+CREATE TABLE IF NOT EXISTS Accidente(
+	codigo_accidente SMALLINT AUTO_INCREMENT PRIMARY KEY,
+	vehiculo_matricula CHAR(7) NOT NULL,
+	lugar VARCHAR(255) NOT NULL,
+	fecha_accidente DATE NOT NULL,
+	status ENUM('Leve', 'Grave') NOT NULL DEFAULT 'Leve'
+);
