@@ -76,5 +76,10 @@ CREATE TABLE IF NOT EXISTS Accidente(
 -- -----------------------------------------------------------------
 -- JOOQ CONFIG
 -- -----------------------------------------------------------------
-
-https://github.com/hellokoding/hellokoding-courses/tree/master/java-examples/java-jooq-mysql
+-- Links:
+-- 
+-- https://github.com/hellokoding/hellokoding-courses/tree/master/java-examples/java-jooq-mysql
+-- https://itsourcecode.com/wp-content/uploads/2021/07/Employee-Management-System-ER-Diagram-2.png
+-- 
+-- 
+-- -----------------------------------------------------------------
