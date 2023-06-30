@@ -6,7 +6,26 @@ Private Sub BtnDebug_Click()
         End If
     Next shp
 End Sub
-
+'IMPORTANTE:
+'Fernández Mourelle, Aaron Manuel [BECARIO] (FE):
+'Dejo esto por aquí también en caso de que pudiera ocurrir algún problema.
+'En caso de haber borrado alguna de las formas que son 100% necesarias:
+'- Los dos buques que usamos de plantilla para generar el resto.
+'- Los cuadrados que guardan las posiciones absolutas para pegar los barcos nuevos.
+'O en el caso de haber añadido a la tabla alguna fila (poco probable, ya que se creó en base a una teórica capacidad máxima).
+'
+'Dejo aquí el sistema de nombres para dichas formas.
+'Para los dos buques:
+'- predShapeRef_Right: buque que apunta a la derecha.
+'- predShapeRef_Left: el inverso.
+'Para los cuadrados que guardan posiciones relativas:
+'- pos_C + fila que guarda el nombre del muelle. P.Ej. pos_C10:
+'En caso de cambiar de columna, habrá que modificar el script.
+'Véase primera parte del For Each:
+'       positionShapeName = "pos_C" & element.Range(1).row       <- Cambiar C por la columna.
+'       newShapeName = "barco_C" & element.Range(1).row         <- Cambiar C por la columna.
+'
+'Alt + F10 para mostrar el menú de selección y editar los nombres rápidamente.
 Private Sub btnNuevoActualizar_Click()
 'Variables -- Ease of use.
 '--------------------------------------------------------------------------------------------------------------------------------
